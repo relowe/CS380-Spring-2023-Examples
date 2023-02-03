@@ -1,0 +1,99 @@
+gdb - gnu debugger
+
+1.) list command
+    - requires that executable has references back to the source code
+    - compile with -g option
+
+    gcc -g list.c -o list
+
+    - list a few lines of source code
+    - repeated list commands will list more codes
+    - arguments to list:
+       list
+       list line number
+       list function
+
+2.) break command
+    - tells gdb to stop execution at some point in the program
+    - arguments:
+      break line number
+      break function
+      break address
+
+3.) run 
+    - start a program
+
+4.) continue
+    - continue until next breakpoint
+
+5.) Managing Breakpoints
+    info breakpoints
+    delete # to remove breakpoint
+
+6.) Controlling Execution
+    next - Execute until the next line of c code within the current scope
+    step - Execute until the next line of code, enters subroutines
+    nexti - Execute until the next machine code instruction in current scope
+    stepi - Execute until the next machine code instruction, enters subroutines
+    kill - Kill the running program
+    run - start the porgram
+    continue - runs until interrupted or next breakpoint
+
+7.) Displaying information 
+    info registers - Show register values
+    print  - temporary inspection of information
+       print variable
+       print $reg
+       print expression
+    display - Creates an expression which is displayed every time debugger stops
+       display variable
+       display $reg
+       display expression
+       display
+    undisplay number - turn off a a display
+    x address - display the contents of memory at a given location
+       x address
+       x $reg
+       x exp
+
+8.) Formatting
+    print, dipslay, x all have formmatting options
+    print/fmt
+    display/fmt
+    x/fmt
+
+    fmt - repeat size type
+     repeat number
+     size - size of each element
+        b - byte 
+        w - word
+        g - giant word
+     type - how to display information
+        x - hexadecimal
+        d - decimal 
+        c - ascii characters
+        i - instruction
+
+9.) Useufl Things 
+   - Display the stack
+       display/24gx $rsp      (64 bit)
+       display/24wx $rsp      (32 bit)
+
+   - display disassembly
+       display/i $rip
+
+10.) help command - show gdb documentation
+
+SHORTCUT - pressing enter on a blank line will repeat the last command.
+
+Short forms
+
+break       b
+continue    c
+run         r
+next        n
+nexti       ni
+step        s
+stepi       si
+
+
