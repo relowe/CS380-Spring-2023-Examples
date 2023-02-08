@@ -10,7 +10,7 @@ int main()
     n = read(0, name, 20);
 
     close(1);
-    open("output.txt", O_CREAT|O_TRUNC, 0644);
+    open("output.txt", O_CREAT|O_TRUNC|O_WRONLY, 0644);
     
     /* trim our input */
     if(name[n-1] == '\n') n--;
