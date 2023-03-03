@@ -4,10 +4,12 @@
 
 #include <windows.h>
 #include <stdio.h>
+#include <strsafe.h>
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 int msgCounter = 0;
+HWND hText;
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
@@ -39,7 +41,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         WS_OVERLAPPEDWINDOW,            // Window style
 
         // Size and position
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+        CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
 
         NULL,       // Parent window    
         NULL,       // Menu
@@ -48,20 +50,30 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     );
 
     //create a button
+    int button_x, button_y;
+    button_x = 800/2 - (200 + 10 + 200) / 2;
+    button_y = 400;
     HWND hButton = CreateWindow(L"BUTTON",
                                 L"Click Me",
                                 WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
-                                0, 0, 
+                                button_x, button_y, 
                                 200, 100, 
                                 hwnd, (HMENU) 10, hInstance, NULL
         );
     HWND hButton2 = CreateWindow(L"BUTTON",
         L"No, Click Me",
         WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
-        210, 0,
+        button_x+200+10, button_y,
         200, 100,
         hwnd, (HMENU) 11, hInstance, NULL
     );
+
+
+     hText = CreateWindow(L"STATIC", L"Hello, world",
+        WS_CHILD | WS_VISIBLE | SS_LEFT,
+        200, 10, 400, 100, hwnd, NULL, hInstance, NULL 
+    );
+
     ShowWindow(hwnd, nCmdShow);
 
     // Run the message loop.
@@ -78,8 +90,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 { 
-
-    printf("Message #%d - 0x%X\n", ++msgCounter, uMsg);
+    char buf[1000];
+    
+    
     switch (uMsg)
     {
 
@@ -89,7 +102,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     case WM_COMMAND:
         printf("Received WM_COMMAND\n");
+        SendMessage(hText, WM_SETTEXT, NULL, (LPARAM)L"WM_COMMAND Received");
         if (HIWORD(wParam) == BN_CLICKED) {
+            SendMessage(hText, WM_SETTEXT, NULL, (LPARAM)L"Button Click Received");
             printf("  it was a button click\n");
             printf("  it was button id %d\n", LOWORD(wParam));
         }
