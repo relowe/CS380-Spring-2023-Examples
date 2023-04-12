@@ -1,0 +1,3 @@
+﻿  window.cpp
+C:\Users\rlowe\OneDrive - Southeast Missouri State University\Documents\Spring 2023\CS380\CS380-Spring-2023-Examples\05 - Windows User Space\CS380-Windows-Example\CS380-Windows-Example\window.cpp(93,10): warning C4101: 'buf': unreferenced local variable
+  CS380-Windows-Example.vcxproj -> C:\Users\rlowe\OneDrive - Southeast Missouri State University\Documents\Spring 2023\CS380\CS380-Spring-2023-Examples\05 - Windows User Space\CS380-Windows-Example\x64\Debug\CS380-Windows-Example.exe
